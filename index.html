@@ -1,0 +1,69 @@
+<title>¡MONKEYTYPE CLON!</title>
+<style>
+    :root {
+        color-scheme: light dark red;
+        --green: #00b755;
+        --yellow: #daaf38;
+        --red: #ca4754;
+        --black: #222;
+        --gray: #999;
+    }
+
+    body {
+        background: var(--black);
+        font-family: fantasy, monospace;
+        display: grid;
+        padding: 32px;
+        justify-content: center;
+        margin-top: 32px;
+        padding: 16px;
+    }
+</style>
+
+<body>
+    <main>
+        <section id="game">
+            <time></time>
+            <p></p>
+            <input autofocus>
+        </section>
+    </main>
+</body>
+
+<script>
+    const $time = document.querySelector('time');
+    const $pargraph = document.querySelector('p');
+    const $input = document.querySelector('input');
+
+    const INITIAL_TIME = 40;
+
+    const TEXT = "The quick brown fox jumps over the lazy dog and midu is trying to clone monkey type for fun and profit using vanilla js for the typing test speed";
+
+    let words = []
+    let currentTime = INITIAL_TIME
+
+    initGame()
+    initEvent()
+
+    function initGame() {
+        words = TEXT.split(' ').slice(0,32)
+        currentTime = INITIAL_TIME
+
+        $time.textContent = currentTime
+        $pargraph.textContent = words.map((word, index) => {
+            const letters = word.split('')
+
+            return  `<word>
+                ${letters.map(letter => {
+                    return `<letter>${letter}</letter>`
+                }).join('')}
+            </word>`
+        })
+    }
+
+    function initEvent() {
+        $input.addEventListener('input', handleInput)
+        $input.addEventListener('keydown', handleKeyDown)
+        $input.addEventListener('keyup', handleKeyUp)
+    }
+</script>
